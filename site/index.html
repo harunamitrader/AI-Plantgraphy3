@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>AI-Plantgraphy3</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <main class="layout">
+      <header class="hero">
+        <h1>AI-Plantgraphy3</h1>
+        <p>暗号化された植物図鑑と観察記録を、このブラウザで復号して表示します。</p>
+      </header>
+
+      <section id="unlock-view" class="card">
+        <h2>図鑑を開く</h2>
+        <p>初回だけパスワードを入力してください。以後は導出済み鍵をこの端末に保存します。</p>
+        <form id="unlock-form">
+          <label for="password-input">パスワード</label>
+          <input id="password-input" name="password" type="password" autocomplete="current-password" required />
+          <button type="submit">復号して開く</button>
+        </form>
+        <p id="unlock-error" class="error" hidden></p>
+      </section>
+
+      <section id="app-view" class="app" hidden>
+        <nav class="toolbar">
+          <button id="lock-button" type="button">ロック</button>
+          <span id="published-at"></span>
+        </nav>
+
+        <section class="card">
+          <p class="notice">AIの植物判定は誤ることがあります。食用・薬用・毒性判断など安全に関わる用途では、AI結果だけを信じないでください。</p>
+        </section>
+
+        <section class="content">
+          <aside class="sidebar card">
+            <h2>図鑑一覧</h2>
+            <div id="plant-list" class="plant-list"></div>
+          </aside>
+
+          <section id="detail-view" class="detail card">
+            <p>左の一覧から植物を選んでください。</p>
+          </section>
+        </section>
+      </section>
+    </main>
+
+    <script src="./app.js" defer></script>
+  </body>
+  </html>

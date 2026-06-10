@@ -1,0 +1,118 @@
+:root {
+  color-scheme: light dark;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  background: #0f172a;
+  color: #e2e8f0;
+}
+
+body {
+  margin: 0;
+  background: linear-gradient(180deg, #0f172a 0%, #111827 100%);
+}
+
+.layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 24px;
+}
+
+.hero {
+  margin-bottom: 20px;
+}
+
+.card {
+  background: rgba(15, 23, 42, 0.82);
+  border: 1px solid rgba(148, 163, 184, 0.2);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 16px 40px rgba(15, 23, 42, 0.35);
+}
+
+.toolbar,
+.content {
+  display: grid;
+  gap: 16px;
+}
+
+.content {
+  grid-template-columns: minmax(260px, 320px) 1fr;
+  margin-top: 16px;
+}
+
+.sidebar,
+.detail {
+  min-height: 280px;
+}
+
+.plant-list {
+  display: grid;
+  gap: 8px;
+}
+
+.plant-list button {
+  text-align: left;
+  background: rgba(30, 41, 59, 0.9);
+  color: inherit;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  border-radius: 10px;
+  padding: 12px;
+  cursor: pointer;
+}
+
+.plant-list button.active {
+  border-color: #38bdf8;
+}
+
+.detail img {
+  width: 100%;
+  max-width: 420px;
+  border-radius: 12px;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.observation {
+  border-top: 1px solid rgba(148, 163, 184, 0.2);
+  margin-top: 16px;
+  padding-top: 16px;
+}
+
+.notice {
+  margin: 0;
+}
+
+.error {
+  color: #fca5a5;
+}
+
+input,
+button {
+  font: inherit;
+}
+
+input {
+  width: 100%;
+  box-sizing: border-box;
+  margin: 8px 0 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid rgba(148, 163, 184, 0.25);
+  background: rgba(15, 23, 42, 0.8);
+  color: inherit;
+}
+
+button {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: none;
+  background: #38bdf8;
+  color: #082f49;
+  cursor: pointer;
+  font-weight: 700;
+}
+
+@media (max-width: 860px) {
+  .content {
+    grid-template-columns: 1fr;
+  }
+}
