@@ -1,6 +1,7 @@
 .env
 /data/
-/site/data/
+!/site/data/
+!/site/data/**
 bot/node_modules/
 node_modules/
 bot/debug/
