@@ -136,11 +136,17 @@ async function renderRoute() {
     return;
   }
 
-  const plantId = decodeURIComponent(match[1]);
-  const plant = state.plants?.[plantId];
+  const plantId = resolvePlantId(match[1]);
+  const plant = plantId ? state.plants?.[plantId] : null;
   if (!plant) {
     detailView.innerHTML = '<p>指定の植物が見つかりません。</p>';
     return;
+  }
+
+  const canonicalHash = `#/plants/${encodeURIComponent(plantId)}`;
+  if (location.hash !== canonicalHash) {
+    history.replaceState(null, '', canonicalHash);
+    renderPlantList();
   }
 
   const wrapper = document.createElement('div');
@@ -184,6 +190,37 @@ async function renderRoute() {
   detailView.replaceChildren(wrapper);
 }
 
+function resolvePlantId(rawValue) {
+  const decoded = decodeHashValue(rawValue).replace(/^\/+|\/+$/g, '');
+  if (!decoded) {
+    return null;
+  }
+
+  if (state.plants?.[decoded]) {
+    return decoded;
+  }
+
+  const normalized = slugifyPlantId(decoded);
+  if (normalized && state.plants?.[normalized]) {
+    return normalized;
+  }
+
+  const observationPlantId = state.observations?.[decoded]?.plant_id;
+  if (observationPlantId && state.plants?.[observationPlantId]) {
+    return observationPlantId;
+  }
+
+  for (const [plantId, plant] of Object.entries(state.plants || {})) {
+    const scientific = slugifyPlantId(plant.scientific_name || '');
+    const common = slugifyPlantId(plant.common_name_ja || '');
+    if (normalized === scientific || normalized === common) {
+      return plantId;
+    }
+  }
+
+  return null;
+}
+
 function createHeading(tagName, text) {
   const element = document.createElement(tagName);
   element.textContent = text;
@@ -202,6 +239,33 @@ function labeledParagraph(label, value) {
   strong.textContent = `${label}: `;
   element.append(strong, document.createTextNode(value || '未登録'));
   return element;
+}
+
+function decodeHashValue(value) {
+  let current = String(value || '');
+  for (let index = 0; index < 3; index += 1) {
+    try {
+      const next = decodeURIComponent(current);
+      if (next === current) {
+        break;
+      }
+      current = next;
+    } catch (error) {
+      break;
+    }
+  }
+  return current.trim();
+}
+
+function slugifyPlantId(value) {
+  return String(value || '')
+    .normalize('NFKD')
+    .replace(/[×]/g, 'x')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+    .slice(0, 80);
 }
 
 async function decryptJson(url) {
