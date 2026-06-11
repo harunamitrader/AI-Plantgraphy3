@@ -1,0 +1,20 @@
+{
+  "name": "ai-plantgraphy3-bot",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Discord-driven plant identification and publishing bot for AI-Plantgraphy3.",
+  "type": "commonjs",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "identify": "node .\\src\\agy-runner.js",
+    "start": "node .\\src\\index.js"
+  },
+  "dependencies": {
+    "@lydell/node-pty": "^1.2.0-beta.12",
+    "discord.js": "^14.26.4",
+    "dotenv": "^17.4.2",
+    "sharp": "^0.34.5"
+  }
+}

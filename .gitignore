@@ -1,0 +1,6 @@
+.env
+data/
+bot/node_modules/
+node_modules/
+bot/debug/
+*.log

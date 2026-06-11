@@ -1,0 +1,23 @@
+{
+  "keys": [
+    "common_name_ja",
+    "scientific_name",
+    "confidence",
+    "candidates",
+    "visible_features",
+    "uncertainty_notes"
+  ],
+  "candidateKeys": [
+    "common_name_ja",
+    "scientific_name",
+    "confidence",
+    "reason"
+  ],
+  "limits": {
+    "candidatesMax": 3,
+    "candidateReasonMax": 120,
+    "visibleFeaturesMax": 5,
+    "visibleFeatureMax": 25,
+    "uncertaintyNotesMax": 120
+  }
+}
